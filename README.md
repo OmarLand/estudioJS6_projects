@@ -1,6 +1,6 @@
 ### 
 <h2 align="center">
-👨‍💻 Este repositorio, es una recopilación de mis prácticas en JS6 ✈️
+👨‍💻 Este repositorio, es una recopilación de mis prácticas en ES6 (ECMAScript 6) ✈️
 </h2>
 
 
@@ -28,4 +28,9 @@
 ## Carrito de compras para tienda online 🛹✈️🚀
 
 - Realizo una pàgina básica usando html/css/bootstrap y JS6 con un carrito de compraa en completo funcionamiento
+- URL: https://github.com/OmarLand/estudioJS6_projects/tree/main/tienda_carrito_compra
+
+## Plataforma de Peliculas ✔️😎👨‍💻🏋️‍♂️
+(🎞️📻🎥🎬)
+- Ahora mismo, está en desarrollo ✍️ una plataforma de consulta de películas, conectando con una API de The Movies Database (TMDB)
 - URL: https://github.com/OmarLand/estudioJS6_projects/tree/main/tienda_carrito_compra
