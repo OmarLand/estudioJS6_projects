@@ -1,0 +1,58 @@
+[
+    {
+        "id"        : 1,
+        "name"      : "Helado de Sandwich de Nata",
+        "image"     : "./img/sandwich-nata.jpg",
+        "extraInfo" : "Caja 6 Ud. (600ml)",
+        "price"     : 1.2
+    },
+    {
+        "id"        : 2,
+        "name"      : "Helado Cucurucho de Vainilla",
+        "image"     : "./img/cucuruchos-vainilla.jpg",
+        "extraInfo" : "Caja 6 Ud. (720ml)",
+        "price"     : 1.55
+    },
+    {
+        "id"        : 3,
+        "name"      : "Mini surtido",
+        "image"     : "./img/mini-surtido.jpg",
+        "extraInfo" : "Caja 6 Ud. (720ml)",
+        "price"     : 1.55
+    },
+    {
+        "id"        : 4,
+        "name"      : "Helado mini doble sandwich nata",
+        "image"     : "./img/sandwich-doble.jpg",
+        "extraInfo" : "Caja 6 Ud. (420ml)",
+        "price"     : 1.99
+    },
+    {
+        "id"        : 5,
+        "name"      : "Helado de fresa",
+        "image"     : "./img/fresa-hielo.jpg",
+        "extraInfo" : "Caja 10 Ud. (750ml)",
+        "price"     : 1.65
+    },
+    {
+        "id"        : 6,
+        "name"      : "Helado Yogoice Mr. Toddy",
+        "image"     : "./img/yogoice.jpg",
+        "extraInfo" : "Caja 8 Ud. (450ml)",
+        "price"     : 1.70
+    },
+    {
+        "id"        : 7,
+        "name"      : "Helado Chocolate",
+        "image"     : "./img/huevo.jpg",
+        "extraInfo" : "Tarrina 1 L",
+        "price"     : 2.55
+    },
+    {
+        "id"        : 8,
+        "name"      : "Helado Medio Coco",
+        "image"     : "./img/medio-coco-helado.jpg",
+        "extraInfo" : "Caja 2 Ud. (350ml)",
+        "price"     : 2.05
+    }
+]
