@@ -1,7 +1,7 @@
 ### 
-<h3 align="center">
+<h2 align="center">
 👨‍💻 Este repositorio, es una recopilación de mis prácticas en JS6 ✈️
-</h3>
+</h2>
 
 
 # EstudioJS6_Projects 👻
