@@ -33,4 +33,4 @@
 ## Plataforma de Peliculas ✔️😎👨‍💻🏋️‍♂️
 (🎞️📻🎥🎬)
 - Ahora mismo, está en desarrollo ✍️ una plataforma de consulta de películas, conectando con una API de The Movies Database (TMDB)
-- URL: https://github.com/OmarLand/estudioJS6_projects/tree/main/tienda_carrito_compra
+- URL: 🚧👷‍♂️👷 (... En desarrollo ...) 👷👷‍♂️🚧
