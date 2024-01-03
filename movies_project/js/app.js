@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     renderNewsMovies();
     renderPopularMovies();
+    renderTopRatedMovies();
 });
 
-const getNewMovies = () => {
+//now_playing, popular, top_rated
+const getType = (type) =>{
+
     const options = {
         method: 'GET',
         headers: {
@@ -12,14 +15,15 @@ const getNewMovies = () => {
         }
     };
       
-    return fetch('https://api.themoviedb.org/3/movie/now_playing?language=es-ES&page=1', options)
+    return fetch(`https://api.themoviedb.org/3/movie/${type}?language=es-ES&page=1`, options)
         .then( response => response.json()  )
         .then( response => response.results )
         .catch( err => console.error(err)  );
+
 }
 
 const renderNewsMovies = async() =>{
-    const newMovies = await getNewMovies();
+    const newMovies = await getType("now_playing");
     //console.log( newMovies );
 
     let html = '';
@@ -58,29 +62,14 @@ const renderNewsMovies = async() =>{
     document.getElementsByClassName('list-news-movies')[0].innerHTML = html;
 }
 
-const getPopularMovies = () => {
-    const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzNlOTA2MWRkYWNiNTJjMzYxMDgyYWI3NjcyZjQxZiIsInN1YiI6IjVlYTg2MmRmYjdmYmJkMDAxZDM5Njk2NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9DdxM-dSCMmQ29M_-BC25VuzPg6cel-EEVkXm-tOefY'
-        }
-      };
-      
-      return fetch('https://api.themoviedb.org/3/movie/popular?language=es-ES&page=1', options)
-        .then(response => response.json())
-        .then(result => result.results)
-        .catch(err => console.error(err));
-}
-
 const renderPopularMovies = async () => {
-    const movies = await getPopularMovies();
+    const movies = await getType("popular");
     // console.log( movies );
 
     let html = "";
 
     movies.forEach( (movie, index) =>{
-        console.log(movie);
+        // console.log(movie);
 
         const { id, title, poster_path } = movie;
         const movieCover = `https://image.tmdb.org/t/p/w500${poster_path}`;
@@ -99,4 +88,27 @@ const renderPopularMovies = async () => {
         }
         document.getElementsByClassName("now-playing__list")[0].innerHTML = html;
     })
+}
+
+const renderTopRatedMovies = async() => {
+    const movies = await getType("top_rated");
+    // console.log( movies );
+
+    let html = "";
+    movies.forEach( (movie, index) => {
+        const { id, title, poster_path } = movie;
+        const movieCover = `https://image.tmdb.org/t/p/w500${poster_path}`;
+        const urlMovie = `../movie.hmtl?id=${id}`;
+
+        if( index < 5 ) {
+            html += `
+                <li class="list-group-item">
+                    <img src="${movieCover}" alt="${title}">
+                    <h3>${title}</h3>
+                    <a href="${urlMovie}" class="btn btn-primary">Ver mas</a>
+                </li>
+            `;
+        }
+    })
+    document.getElementsByClassName("top-rated-playing__list")[0].innerHTML = html;
 }
