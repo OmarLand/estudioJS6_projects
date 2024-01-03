@@ -1,9 +1,7 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    
+document.addEventListener("DOMContentLoaded", () => {
     renderNewsMovies();
-
+    renderPopularMovies();
 });
-
 
 const getNewMovies = () => {
     const options = {
@@ -33,6 +31,7 @@ const renderNewsMovies = async() =>{
         const urlMovie = `../movie.html?id=${id}`
         //console.log( index );
         
+        // Renderizo las imagenes del carrusel
         html += `
             <div class="carousel-item ${index === 0 ? "active" : null}" style="background-image: url('${urlImage}')">
                 <div class="carousel-caption">
@@ -44,6 +43,7 @@ const renderNewsMovies = async() =>{
         `; 
     });
 
+    // Renderizo en el HTML los controles flecha del carousel y conecto con ID para poder controlarlo
     html += `
         <button class="carousel-control-prev" type="button" data-target="#carousel-news-movies" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -56,4 +56,47 @@ const renderNewsMovies = async() =>{
     `;
 
     document.getElementsByClassName('list-news-movies')[0].innerHTML = html;
+}
+
+const getPopularMovies = () => {
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzNlOTA2MWRkYWNiNTJjMzYxMDgyYWI3NjcyZjQxZiIsInN1YiI6IjVlYTg2MmRmYjdmYmJkMDAxZDM5Njk2NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9DdxM-dSCMmQ29M_-BC25VuzPg6cel-EEVkXm-tOefY'
+        }
+      };
+      
+      return fetch('https://api.themoviedb.org/3/movie/popular?language=es-ES&page=1', options)
+        .then(response => response.json())
+        .then(result => result.results)
+        .catch(err => console.error(err));
+}
+
+const renderPopularMovies = async () => {
+    const movies = await getPopularMovies();
+    // console.log( movies );
+
+    let html = "";
+
+    movies.forEach( (movie, index) =>{
+        console.log(movie);
+
+        const { id, title, poster_path } = movie;
+        const movieCover = `https://image.tmdb.org/t/p/w500${poster_path}`;
+        const urlMovie   = `../movie.html?id=${id}`
+
+        if( index < 5 ){
+            html+= `
+            
+                <li class="list-group-item">
+                    <img src="${movieCover}" alt="${title}">
+                    <h3> ${title} </h3>
+                    <a href="${urlMovie}" class="btn btn-primary">Ver más</a>
+                </li>
+            
+            `;
+        }
+        document.getElementsByClassName("now-playing__list")[0].innerHTML = html;
+    })
 }

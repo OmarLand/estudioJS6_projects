@@ -18,3 +18,28 @@
     padding         : 10px 20px;
     border-radius   : 10px;
 }
+
+#home .now-playing h2{
+    text-align        : cenrter;
+    padding           : 15px 0;
+    margin            : 50px 0 0 0;
+    background-color  : #505F93;
+    color             : white;
+}
+
+#home .now-playing__list li{
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
+}
+
+#home .now-playing__list li h3{
+    margin    : 0;
+    font-size : 12px;
+}
+
+#home .now-playing__list img {
+    width         : 70px;
+    height        : 70px;
+    border-radius : 50px;
+}
