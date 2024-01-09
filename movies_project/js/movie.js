@@ -41,7 +41,7 @@ const renderMoviesDetails = async ( movieId ) => {
     renderBackground(backdrop_path)
     renderPoster( poster_path, title );
     renderMoviesData( title, overview, genres, release_date );
-    renderTeaser( movieId );
+    getTeaser( movieId );
 }
 
 const renderBackground = ( backdrop_path ) => {
@@ -87,7 +87,7 @@ const renderMoviesData = ( title, overview, genres, release_date, movieId ) => {
 }
 
 
-const renderTeaser = ( movieId ) => {
+const getTeaser = ( movieId ) => {
     
     const options = {
         method: 'GET',
@@ -99,7 +99,30 @@ const renderTeaser = ( movieId ) => {
       
       fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=es-ES`, options)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(result => { renderTeaser(result) })
         .catch(err => console.error(err));
 
+}
+
+const renderTeaser = ( objVideo ) => {
+    console.log( objVideo );
+    let keyVideo = "";
+
+    objVideo.results.forEach(video => {
+        if( video.type === "Trailer" && video.site === "YouTube" ){
+            keyVideo = video.key;
+        }
+    });
+
+    let urlIframe = "";
+    if( keyVideo !== "" ){
+        urlIframe = `
+            <iframe width="100%" height="440px" src="https://www.youtube.com/embed/${keyVideo}"
+            frameborder="0" allow="accelerometer"; autoplay; ecrypted-media; 
+            gryscope; picture-in-picture"allowfullscreen></iframe>
+        `;
+    } else {
+        urlIframe = `<div class="no-teaser-iframe"> La Pelicula no tiene trailer... </div>`
+    }
+    document.getElementsByClassName("video-teaser-iframe")[0].innerHTML = urlIframe;
 }
