@@ -36,11 +36,16 @@
         </div>
     </nav>
     
-    <h2>Pagina De busqueda</h2>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Buscador de películas</h1>
+        <input id="search-movie" class="form-control" placeholder="Busca una pelicula" type="text" onkeyup="searchMovies()">
+        <div class="row list-cards"></div>
+    </div>
 
     <script src="./js/jquery.min.js"></script>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/3787050880.js" crossorigin="anonymous"></script>
-    <script src="./js/app.js"></script>
+    <!-- <script src="./js/app.js"></script> -->
+    <script src="./js/search.js"></script>
 </body>
