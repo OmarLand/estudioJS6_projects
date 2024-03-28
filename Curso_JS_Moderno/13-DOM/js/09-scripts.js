@@ -1,0 +1,1 @@
+// Para eliminar un elemento del DOM usando solo el metodo .remove();
