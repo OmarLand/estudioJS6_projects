@@ -13,17 +13,23 @@ document.addEventListener('DOMContentLoaded', function(){
 
     function validar(e){
 
-        console.log(e.target.parentElement);
-
         if( e.target.value.trim() === '' ){
-            // console.log('>>>', e.target.id);
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
-        } else {
-            console.log('Contenedor del campo es: ', e.target.value);
+            return;
+        } 
+
+        if( e.target.id === 'email' && !validarEmail( e.target.value )) {
+            mostrarAlerta('El Email no es valido', e.target.parentElement);
+            return;
         }
+
+        limpiarAlerta( e.target.parentElement );
     };
 
     function mostrarAlerta( mensaje,referencia ) {
+        
+        limpiarAlerta(referencia);
+
         // Generar alerta en HTML
         const error = document.createElement('p');
         error.textContent = mensaje;
@@ -31,6 +37,20 @@ document.addEventListener('DOMContentLoaded', function(){
 
         // Inyectamos el error al formulario...
         referencia.appendChild(error);
+    }
+
+    function limpiarAlerta(referencia){
+        // Comprueba si existe un alerta
+        const alerta = referencia.querySelector('.bg-red-600');
+        if( alerta ){
+            alerta.remove();
+        }
+    }
+
+    function validarEmail(){
+        const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ 
+        const resultado = regex.test(email);
+        return resultado;
     }
 
 });
