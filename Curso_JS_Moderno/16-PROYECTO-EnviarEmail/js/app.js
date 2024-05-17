@@ -14,11 +14,35 @@ document.addEventListener('DOMContentLoaded', function(){
     const inputMensaje = document.querySelector('#mensaje');
     const formulario   = document.querySelector('#formulario');
     const btnSubmit    = document.querySelector('#formulario button[type="submit"]');
+    const btnReset     = document.querySelector('#formulario button[type="reset"]');
+    const spinner      = document.querySelector('#spinner');
 
     // Asignar eventos
     inputEmail.addEventListener('blur', validar);
     inputAsunto.addEventListener('blur', validar);
     inputMensaje.addEventListener('blur', validar);
+
+    formulario.addEventListener('submit', enviarEmail);
+
+    btnReset.addEventListener('click', function(e){
+        e.preventDefault();
+        //Reiniciamos el objeto
+        email.email     = '';
+        asunto.asunto   = '';
+        mensaje.mensaje = '';
+
+        formulario.reset();
+        comprobarEmail();
+    });
+
+    function enviarEmail(e){
+        e.preventDefault();
+
+        console.log("Dentro de Enviar Email,..");
+
+        spinner.classList.add('flex');
+        spinner.classList.remove('hidden');
+    }
 
     function validar(e){
 
