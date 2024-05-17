@@ -27,12 +27,7 @@ document.addEventListener('DOMContentLoaded', function(){
     btnReset.addEventListener('click', function(e){
         e.preventDefault();
         //Reiniciamos el objeto
-        email.email     = '';
-        asunto.asunto   = '';
-        mensaje.mensaje = '';
-
-        formulario.reset();
-        comprobarEmail();
+        resetearFormulario();   
     });
 
     function enviarEmail(e){
@@ -42,6 +37,21 @@ document.addEventListener('DOMContentLoaded', function(){
 
         spinner.classList.add('flex');
         spinner.classList.remove('hidden');
+
+        setTimeout(() => {
+            spinner.classList.remove('flex');
+            spinner.classList.add('hidden');
+
+            resetearFormulario();
+
+            // - Crear una alerta
+            const alertaExito = document.createElement('p');
+            alertaExito.classList.add('bg-green-500','text-white','p-2','text-center','rounded-lg','mt-10','font-bold','text-sm','uppercase');
+            alertaExito.textContent = 'Mensaje enviado correctamente';
+
+            formulario.appendChild(alertaExito);
+
+        }, 3000);
     }
 
     function validar(e){
@@ -107,6 +117,16 @@ document.addEventListener('DOMContentLoaded', function(){
         btnSubmit.classList.remove('opacity-50')
         btnSubmit.disabled = false;
 
+    }
+
+    function resetearFormulario(){
+        //Reiniciamos el objeto
+        email.email     = '';
+        asunto.asunto   = '';
+        mensaje.mensaje = '';
+
+        formulario.reset();
+        comprobarEmail();
     }
 
 
