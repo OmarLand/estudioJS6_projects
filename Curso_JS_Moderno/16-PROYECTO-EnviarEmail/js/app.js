@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function(){
-
+    
     const email = {
         email   : '',
         asunto  : '',
         mensaje : ''
     }
 
-    console.log(email);
+    //console.log(email);
 
     // Seleccionar los elementos de la interfaz
     const inputEmail   = document.querySelector('#email');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function(){
     function enviarEmail(e){
         e.preventDefault();
 
-        console.log("Dentro de Enviar Email,..");
+        // console.log("Dentro de Enviar Email,..");
 
         spinner.classList.add('flex');
         spinner.classList.remove('hidden');
@@ -100,12 +100,12 @@ document.addEventListener('DOMContentLoaded', function(){
     function comprobarEmail(){
         if( Object.values(email).includes('') ) {
             btnSubmit.classList.add('opacity-50')
-            btnSubmit.disable = true;
+            btnSubmit.disabled = true;
             return;
         }
         
         btnSubmit.classList.remove('opacity-50')
-        btnSubmit.disable = false;
+        btnSubmit.disabled = false;
 
     }
 
