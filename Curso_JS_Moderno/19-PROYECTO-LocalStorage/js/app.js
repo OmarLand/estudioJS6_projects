@@ -14,6 +14,8 @@ function eventListeners() {
     document.addEventListener('DOMContentLoaded', () => {
         tweets = JSON.parse( localStorage.getItem('tweets')) || [];
         console.log( tweets );
+
+        crearHTML(); // Creamos el HTML partiendo de lo que almacenamos en el localStorage
     })
 };
 
