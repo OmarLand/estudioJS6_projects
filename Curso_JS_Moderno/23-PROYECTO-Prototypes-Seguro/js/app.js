@@ -31,5 +31,37 @@ const ui = new UI();
 console.log(ui);
 
 document.addEventListener('DOMContentLoaded', () =>{
-    ui.llenarOpciones();
+    ui.llenarOpciones();  // Llenamos el select con los años
 })
+
+eventListeners();
+function eventListeners(){
+    const formulario = document.querySelector('#cotizar-seguro');
+    formulario.addEventListener('submit', cotizarSeguro)
+}
+
+function cotizarSeguro(e){
+    e.preventDefault();
+
+    // Leer la marca seleccionada
+    const marca = document.querySelector('#marca').value;
+    //console.log('>>>', marca);
+
+
+    // Leer el año seleccionado
+    const anio = document.querySelector('#year').value;
+    //console.log( 'Año: ', anio );
+
+    // Leer la cobertura
+    const tipo = document.querySelector('input[name="tipo"]:checked').value;
+    console.log('Tipo:', tipo );
+
+    if( marca === '' || anio === '' || tipo === '' ){
+        console.log('No pasó la validación');
+    } else {
+        console.log('Sí pasó la validación....');
+    }
+
+    console.log('Cotizando...');
+
+}
