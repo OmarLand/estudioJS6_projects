@@ -99,7 +99,7 @@ UI.prototype.mostrarMensaje = (mensaje, tipo) => {
 
 UI.prototype.mostrarResultado = (total, seguro) =>{
 
-    const { marca, anio, tipo } = seguro;
+    const { marca, year, tipo } = seguro;
 
     let textoMarca;
 
@@ -125,6 +125,8 @@ UI.prototype.mostrarResultado = (total, seguro) =>{
     div.innerHTML = `
         <p class="header"> Tu Resumen: </p>
         <p class="font-bold"> Marca: <span class="font-normal"> ${textoMarca} </span> </p>
+        <p class="font-bold"> Año: <span class="font-normal"> ${year} </span> </p>
+        <p class="font-bold"> Tipo seguro: <span class="font-normal capitalize"> ${tipo} </span> </p>
         <p class="font-bold"> Total: € <span class="font-normal"> ${total} </span> </p>
     `
 
