@@ -15,7 +15,6 @@ fechaInput.addEventListener('change', datosCita);
 sintomasInput.addEventListener('change', datosCita);
 formulario.addEventListener('submit', submitCita)
 
-
 //Objeto de Cita
 const citaObj = {
     paciente    : '',
@@ -25,7 +24,6 @@ const citaObj = {
     sintomas    : '',
 }
 
-
 function datosCita (e){
     // console.log(e.target.value);
     citaObj[e.target.name] = e.target.value
@@ -34,9 +32,9 @@ function datosCita (e){
 
 function submitCita(e){
     e.preventDefault();
-    const { paciente, propietario, email, fecha, sintomas } = citaObj;
-    if( paciente.trim() === '' || propietario.trim() ==='' || email.trim() === '' || fecha.trim() === '' || sintomas.trim() === '' ){
-        console.log( 'Paciente esta vacio...' );
+
+    if( Object.values(citaObj).some( valor => valor.trim() === '' )){
+        console.log( 'Todos los campos son obligatorios' );
         return;
     }
 
