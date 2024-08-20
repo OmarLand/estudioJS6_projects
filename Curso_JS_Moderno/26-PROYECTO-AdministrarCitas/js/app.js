@@ -6,6 +6,7 @@ const fechaInput       = document.querySelector('#fecha');
 const sintomasInput    = document.querySelector('#sintomas');
 
 const formulario      = document.querySelector('#formulario-cita');
+const formularioInput = document.querySelector('#formulario-cita input[type="submit"]');     
 const contenedorCitas = document.querySelector('#citas');
 
 const btnEditar       = document.querySelector('.btn-editar');
@@ -20,7 +21,9 @@ propietarioInput.addEventListener('change', datosCita);
 emailInput.addEventListener('change', datosCita);
 fechaInput.addEventListener('change', datosCita);
 sintomasInput.addEventListener('change', datosCita);
-formulario.addEventListener('submit', submitCita)
+formulario.addEventListener('submit', submitCita);
+
+let editando = false;
 
 //Objeto de Cita
 const citaObj = {
@@ -81,6 +84,11 @@ class AdminCitas {
         console.log( this.citas );
     }
 
+    editar(citaActualizada){
+        this.citas = this.citas.map( cita => cita.id === citaActualizada.id ? citaActualizada : cita );
+        this.mostrar();
+    }
+
     mostrar(){
 
         // Limpiar el html previo
@@ -89,7 +97,6 @@ class AdminCitas {
         }
 
         // Generando las citas
-   
         this.citas.forEach(cita => {
             const divCita = document.createElement('div');
             divCita.classList.add('mx-5', 'my-10', 'bg-white', 'shadow-md', 'px-5', 'py-10' ,'rounded-xl', 'p-3');
@@ -156,34 +163,41 @@ function submitCita(e){
 
     console.log( citaObj );
     
-
     if( Object.values( citaObj ).some( valor => valor.trim() === '' ) ){
         // console.log( 'Todos los campos son obligatorios' );
         new Notificacion({
             texto : 'Todos los campos son obligatorios',
             tipo  : 'error' 
         }) 
-
-        return;
-        
+        return;  
     }
 
-    citas.agregar({...citaObj});
+    if( editando ){
+        // console.log('Editando registro');
+        citas.editar( { ...citaObj } );
+        new Notificacion({
+            texto : '¡Guardado correctamente!',
+            tipo  : 'exito' 
+        }) 
+    } else {
+        console.log('Registro Nuevo');
+        citas.agregar({...citaObj});
+        new Notificacion({
+            texto : 'Paciente registrado correctamente.',
+            tipo  : 'exito' 
+        }) 
+    }
     formulario.reset();
     reiniciarObjetoCita();
-    
-    new Notificacion({
-        texto : 'Paciente registrado correctamente.',
-        tipo  : 'exito' 
-    }) 
+    formularioInput.value = 'Registrar Paciente';
+    editando = false;
 
 }
-
 
 function reiniciarObjetoCita(){
     //Reiniciar el objeto
     citaObj.id          = generarId();
-    citaObj.paciente    ='';
+    citaObj.paciente    = '';
     citaObj.propietario = '';
     citaObj.email       = '';
     citaObj.fecha       = '';
@@ -202,5 +216,9 @@ function cargarEdicion( cita ){
     emailInput.value       = cita.email;
     fechaInput.value       = cita.fecha;
     sintomasInput.value    = cita.sintomas;
+
+    editando = true;
+
+    formularioInput.value = 'Guardar Cambios';
     
 }
