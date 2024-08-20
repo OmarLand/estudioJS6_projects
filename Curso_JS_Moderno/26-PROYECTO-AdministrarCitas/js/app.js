@@ -24,6 +24,7 @@ formulario.addEventListener('submit', submitCita)
 
 //Objeto de Cita
 const citaObj = {
+    id          : generarId(),
     paciente    : '',
     propietario : '',
     email       : '',
@@ -76,8 +77,8 @@ class AdminCitas {
 
     agregar( cita ){
         this.citas = [...this.citas, cita]
-        // console.log( this.citas );
         this.mostrar();
+        console.log( this.citas );
     }
 
     mostrar(){
@@ -120,7 +121,6 @@ class AdminCitas {
             const clone = structuredClone( cita )
             btnEditar.onclick = () => cargarEdicion( clone );
 
-
             const btnEliminar = document.createElement('button');
             btnEliminar.classList.add('py-2', 'px-10', 'bg-red-600', 'hover:bg-red-700', 'text-white', 'font-bold', 'uppercase', 'rounded-lg', 'flex', 'items-center', 'gap-2');
             btnEliminar.innerHTML = 'Eliminar <svg fill="none" class="h-5 w-5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
@@ -154,6 +154,9 @@ const citas = new AdminCitas();
 function submitCita(e){
     e.preventDefault();
 
+    console.log( citaObj );
+    
+
     if( Object.values( citaObj ).some( valor => valor.trim() === '' ) ){
         // console.log( 'Todos los campos son obligatorios' );
         new Notificacion({
@@ -179,6 +182,7 @@ function submitCita(e){
 
 function reiniciarObjetoCita(){
     //Reiniciar el objeto
+    citaObj.id          = generarId();
     citaObj.paciente    ='';
     citaObj.propietario = '';
     citaObj.email       = '';
@@ -186,8 +190,17 @@ function reiniciarObjetoCita(){
     citaObj.sintomas    = '';
 }
 
+function generarId(){
+    return Math.random().toString(36).substring(2) + Date.now();
+}
+
 function cargarEdicion( cita ){
-    // alert('Hasta dado click...');
-    console.log( cita );
+    Object.assign(citaObj, cita);
+
+    pacienteInput.value    = cita.paciente;
+    propietarioInput.value = cita.propietario;
+    emailInput.value       = cita.email;
+    fechaInput.value       = cita.fecha;
+    sintomasInput.value    = cita.sintomas;
     
 }
