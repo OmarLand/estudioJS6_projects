@@ -31,8 +31,7 @@ class Notificacion {
     constructor({texto, tipo}) {
         this.texto = texto;
         this.tipo  = tipo;
-
-        // this.mostrar();
+        this.mostrar();
     }
 
     mostrar(){
@@ -130,19 +129,34 @@ const citas = new AdminCitas();
 function submitCita(e){
     e.preventDefault();
 
-    if( Object.values(citaObj).some( valor => valor.trim() === '' )){
+    if( Object.values( citaObj ).some( valor => valor.trim() === '' ) ){
         // console.log( 'Todos los campos son obligatorios' );
-        const notificacion = new Notificacion({
+        new Notificacion({
             texto : 'Todos los campos son obligatorios',
             tipo  : 'error' 
         }) 
-
-        // console.log('>>>', notificacion );
-        notificacion.mostrar();
+        
         return;
         
     }
 
     citas.agregar(citaObj);
-    citas.mostrar();
+    formulario.reset();
+    reiniciarObjetoCita();
+    
+    new Notificacion({
+        texto : 'Paciente registrado correctamente.',
+        tipo  : 'exito' 
+    }) 
+
+}
+
+
+function reiniciarObjetoCita(){
+    //Reiniciar el objeto
+    citaObj.paciente    ='';
+    citaObj.propietario = '';
+    citaObj.email       = '';
+    citaObj.fecha       = '';
+    citaObj.sintomas    = '';
 }
