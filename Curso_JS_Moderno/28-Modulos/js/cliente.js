@@ -1,5 +1,7 @@
 // Exportando variables
 
+// import { Empresa } from "./empresa";
+
 export const nombreCliente = 'Omar';
 export const ahorro = 500;
 
@@ -26,3 +28,9 @@ export class Cliente {
         return `Clientes: ${this.nombre} - Ahorro: ${this.ahorro}`;
     }
 }
+
+export default function nuevaFuncion(){
+    console.log('Este es el export default...');
+    
+}
+
