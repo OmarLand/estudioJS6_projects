@@ -1,4 +1,4 @@
-
+let DB;
 const mascotaInput = document.querySelector('#mascota');
 const propietarioInput = document.querySelector('#propietario');
 const telefonoInput = document.querySelector('#telefono');
@@ -19,9 +19,14 @@ const heading = document.querySelector('#administra');
 
 let editando = false;
 
+window.onload = () => {
+    eventListeners();
+    
+    crearDB();
+    
+}
 
 // Eventos
-eventListeners();
 function eventListeners() {
     mascotaInput.addEventListener('change', datosCita);
     propietarioInput.addEventListener('change', datosCita);
@@ -204,6 +209,18 @@ function nuevaCita(e) {
         // Añade la nueva cita
         administrarCitas.agregarCita({...citaObj});
 
+        // Insertamos Registro en IndexedDB [La Base de datos]
+        const transaction = DB.transaction(['citas'], 'readwrite');
+
+        // Habilitamos el ObjectStore
+        const objectStore = transaction.objectStore('citas');
+        
+        // Insertamos en la DB
+        objectStore.add(citaObj);
+        transaction.oncomplete = function (){
+            console.log('Cita añadida...');
+        }
+
         // Mostrar mensaje de que todo esta bien...
         ui.imprimirAlerta('Se agregó correctamente')
     }
@@ -262,4 +279,42 @@ function cargarEdicion(cita) {
 
     editando = true;
 
+}
+
+// Para crear una base de datos usando indexedDB
+function crearDB() {
+    // Creamos la base de datos version 1.0
+    const crearDB = window.indexedDB.open('citas',1);
+
+    // Si hay un error:
+    crearDB.onerror = function(){
+        console.log('Hubo un error');
+    }
+
+    // Si todo va bien
+    crearDB.onsuccess = function(){
+        console.log('Base de datos creada');
+
+        DB = crearDB.result;
+        
+    }
+
+    // Definir el Schema:
+    crearDB.onupgradeneeded = function(e){
+        const db = e.target.result;
+
+        const objectStore = db.createObjectStore('citas',{
+            keyPath       : 'id',
+            autoincrement : true,
+        });
+
+        // Definir todas las columnas
+        objectStore.createIndex('mascota', 'mascota',{unique:false})
+        objectStore.createIndex('propietario', 'propietario',{unique:false})
+        objectStore.createIndex('telefono', 'telefono',{unique:false})
+        objectStore.createIndex('fecha', 'fecha',{unique:false})
+        objectStore.createIndex('hora', 'hora',{unique:false})
+        objectStore.createIndex('sintomas', 'sintomas',{unique:false})
+        objectStore.createIndex('id', 'id',{unique:true})
+    }
 }
