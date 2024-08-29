@@ -1,4 +1,4 @@
-// let DB;
+let DB;
 (function(){
 
     document.addEventListener('DOMContentLoaded', () =>{
@@ -7,7 +7,7 @@
 
     // Crea la base de datos
     function crearDB() {
-        const crearDB = window.indexedDB.open('crm',1);
+        const crearDB = window.indexedDB.open('crm',2);
 
         
         crearDB.onerror = function(){
