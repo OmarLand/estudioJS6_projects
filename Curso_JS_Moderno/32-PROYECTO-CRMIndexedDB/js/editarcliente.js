@@ -1,11 +1,22 @@
+
 let DB;
+let idCliente;
+
 const nombreInput = document.querySelector('#nombre');
+const emailInput = document.querySelector('#email');
+const telefonoInput = document.querySelector('#telefono');
+const empresaInput = document.querySelector('#empresa');
+
+const formulario = document.querySelector('#formulario');
 
 (function(){
 
 
     document.addEventListener('DOMContentLoaded', () => {
         conectarDB();
+
+        // Actualizar el registro:
+        formulario.addEventListener('submit', actualizarCliente)
 
         // Verificar el ID  de la URL
         const parametrosURL = new URLSearchParams(window.location.search);
@@ -16,6 +27,38 @@ const nombreInput = document.querySelector('#nombre');
             }, 1000);
         }
     });
+
+    function actualizarCliente(e){
+        e.preventDefault();
+
+        if(nombreInput.value === '' || emailInput.value === '' || empresaInput.value === '' || telefonoInput.value === ''){
+            imprimirAlerta('Todos los campos son obligatorios','error');
+            return;
+        }
+    }
+
+    // Actualizar cliente
+    const clienteActualizado = {
+        nombre   : nombreInput.value,
+        email    : emailInput.value,
+        telefono : telefonoInput.value,
+        empresa  : empresaInput.value,
+        id       : Number(idCliente)
+    }
+
+    const transaction = DB.transaction(['crm'],'readwrite');
+    const objectStore = transaction.objectStore('crm');
+
+    objectStore.put(clienteActualizado);
+
+    transaction.oncomplete = function(){
+        console.log('CLiente actualizado exitosamente');
+    }
+
+    transaction.onerror = function(){
+        console.log('Woops! No pude actualizar el cliente... :( ');
+        
+    }
 
     function obtenerCliente(id){
         //console.log(id);
@@ -37,9 +80,12 @@ const nombreInput = document.querySelector('#nombre');
     }
 
     function llenarFormulario(datosCliente){
-        const { nombre } = datosCliente;
+        const { nombre, email, telefono, empresa } = datosCliente;
 
-        nombreInput.value = nombre;
+        nombreInput.value   = nombre;
+        empresaInput.value  = empresa;
+        emailInput.value    = email;
+        telefonoInput.value = telefono;
     }   
 
     function conectarDB(){
