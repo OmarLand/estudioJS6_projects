@@ -1,16 +1,13 @@
-
-let DB;
-let idCliente;
-
-const nombreInput = document.querySelector('#nombre');
-const emailInput = document.querySelector('#email');
-const telefonoInput = document.querySelector('#telefono');
-const empresaInput = document.querySelector('#empresa');
-
-const formulario = document.querySelector('#formulario');
-
 (function(){
-
+    let DB;
+    let idCliente;
+    
+    const nombreInput = document.querySelector('#nombre');
+    const emailInput = document.querySelector('#email');
+    const telefonoInput = document.querySelector('#telefono');
+    const empresaInput = document.querySelector('#empresa');
+    
+    const formulario = document.querySelector('#formulario');
 
     document.addEventListener('DOMContentLoaded', () => {
         conectarDB();
@@ -52,11 +49,16 @@ const formulario = document.querySelector('#formulario');
     objectStore.put(clienteActualizado);
 
     transaction.oncomplete = function(){
-        console.log('CLiente actualizado exitosamente');
+        imprimirAlerta('Cliente actualizado exitosamente');
+
+        setTimeout(() => {
+            window.location.href ='index.html';
+        }, 2000);
+
     }
 
     transaction.onerror = function(){
-        console.log('Woops! No pude actualizar el cliente... :( ');
+        imprimirAlerta('Woops! No pude actualizar el cliente... :( ','error');
         
     }
 

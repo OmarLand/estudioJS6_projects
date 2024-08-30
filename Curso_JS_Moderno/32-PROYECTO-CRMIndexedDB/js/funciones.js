@@ -1,3 +1,5 @@
+
+// Conectamos con la Base de datos del indexedDB
 function conectarDB(){
     const abrirConexion = window.indexedDB.open('crm',2);
 
@@ -11,6 +13,7 @@ function conectarDB(){
 
 }
 
+// Imprimimos el alerta hecho con tailWind CSS
 function imprimirAlerta(mensaje, tipo){
 
     const alerta = document.querySelector('.alerta');

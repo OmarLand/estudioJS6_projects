@@ -9,8 +9,6 @@ let DB;
         formulario.addEventListener('submit', validarCliente);
     })
 
-
-
     function validarCliente(e){
         e.preventDefault();
 
