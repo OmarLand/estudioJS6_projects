@@ -28,7 +28,7 @@ function ejecutarSpeechAPI(){
         speech.innerHTML = `Capturado: ${transcript}`;
 
         const seguridad = document.createElement('p');
-        seguridad.innerHTML = `Seguridad ${ parseInt( confidence*100 ) }`
+        seguridad.innerHTML = `Seguridad ${ parseInt( confidence*100 ) }%`
 
         salida.append(speech);
     }
