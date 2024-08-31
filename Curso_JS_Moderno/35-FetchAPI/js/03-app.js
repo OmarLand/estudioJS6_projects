@@ -25,7 +25,7 @@ function mostrarHTML( empleados ){
         `;
     });
 
-    contenido.innerHTML = html
+    contenido.innerHTML = html;
 
 
 }
