@@ -59,11 +59,13 @@ function consultarAPI(ciudad, pais){
 
     // console.log(url);
 
+    spinner();
+
     fetch(url)
         .then(res => res.json())
         .then( datos => {
+
             limpiarHTML(); // Limpiamos el HTML previo
-            // console.log(datos);
             
             if( datos.cod === "404" ){
                 mostrarError('Ciudad no encontrada');
@@ -77,17 +79,34 @@ function consultarAPI(ciudad, pais){
 
 function mostrarClima(datos){
     
-    const { main: {temp, temp_max, temp_min} } = datos;
+    const {name, main: {temp, temp_max, temp_min} } = datos;
 
     const centigrados = kelvinACentrigrados(temp);
+    const max = kelvinACentrigrados(temp_max);
+    const min = kelvinACentrigrados(temp_min);
+
+    const nombreCiudad = document.createElement('div');
+    nombreCiudad.textContent = `Clima en ${name}`;
+    nombreCiudad.classList.add('font-bold','text-2xl');
 
     const actual = document.createElement('p');
     actual.innerHTML = `${centigrados} &#8451;`;
     actual.classList.add('font-bold','text-6xl');
 
+    const tempMaxima = document.createElement('div');
+    tempMaxima.innerHTML = `Max: ${max} &#8451;`
+    tempMaxima.classList.add('text-xl');
+
+    const tempMinima = document.createElement('div');
+    tempMinima.innerHTML = `Min: ${min} &#8451;`
+    tempMinima.classList.add('text-xl');
+
     const resultadoDiv = document.createElement('div');
     resultadoDiv.classList.add('text-center','text-white');
     resultadoDiv.appendChild(actual);
+    resultadoDiv.appendChild(nombreCiudad);
+    resultadoDiv.appendChild(tempMaxima);
+    resultadoDiv.appendChild(tempMinima);
 
     resultado.appendChild( resultadoDiv );
 
@@ -101,4 +120,23 @@ function limpiarHTML(){
     while(resultado.firstChild){
         resultado.removeChild(resultado.firstChild);
     }
+}
+
+function spinner(){
+    
+    limpiarHTML();
+
+    const divSpinner = document.createElement('div');
+    divSpinner.classList.add('sk-fading-circle');
+
+    divSpinner.innerHTML = `
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+    `;
+
+    resultado.appendChild(divSpinner);
 }
