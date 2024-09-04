@@ -23,6 +23,7 @@ function buscarClima(e){
     }
 
     // Consultariamos la API
+    consultarAPI(ciudad, pais);
 }
 
 function mostrarError( mensaje ){
@@ -47,4 +48,19 @@ function mostrarError( mensaje ){
     
     }
 
+}
+
+
+function consultarAPI(ciudad, pais){
+
+    const appID = '69d2dcebb1466799a426374d2bce1e7e';
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appID}`;
+
+    // console.log(url);
+
+    fetch(url)
+        .then(res => res.json())
+        .then( datos => console.log( '>', datos ) )
+    
 }
