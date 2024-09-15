@@ -40,7 +40,7 @@ function iniciarApp(){
 
     function mostrarRecetas( recetas = [] ){
 
-        limpiarHTML();
+        limpiarHTML(resultado);
 
         // console.log( recetas );
         // Iterar en los resultados
@@ -104,7 +104,7 @@ function iniciarApp(){
 
     function mostrarRecetaModal(receta){
         const { idMeal,strInstructions,strMeal,strMealThumb} = receta;
-        console.log(receta);
+        //console.log(receta);
 
         // Añadir contenido al modal
         const modalTitle = document.querySelector('.modal .modal-title');
@@ -136,12 +136,43 @@ function iniciarApp(){
         }
 
         modalBody.appendChild(listGroup);
+
+        const modalFooter = document.querySelector('.modal-footer');
+        limpiarHTML(modalFooter);
+        
+        // Botones de cerrar y favoritos
+        const btnFavorito = document.createElement('button');
+        btnFavorito.classList.add('btn', 'btn-danger', 'col');
+        btnFavorito.textContent = 'Guardar Favorito';
+
+
+        // LocalStorage
+        btnFavorito.onclick = function(){
+            agregarFavorito();
+        }
+
+        
+        const btnCerrar = document.createElement('button');
+        btnCerrar.classList.add('btn', 'btn-secondary', 'col');
+        btnCerrar.textContent = 'Cerrar';
+        btnCerrar.dataset.bsDismiss = 'modal'
+        // btnCerrar.onclick = function(){
+        //     modal.hide();
+        // }
+        
+        modalFooter.appendChild(btnFavorito);
+        modalFooter.appendChild(btnCerrar);
         
         // Muestra el Modal
         modal.show()
     }
 
-    function limpiarHTML(){
+    function agregarFavorito(){
+        console.log('Agregando...');
+        
+    }
+
+    function limpiarHTML(resultado){
         while( resultado.firstChild ){
             resultado.removeChild(resultado.firstChild);
         }
