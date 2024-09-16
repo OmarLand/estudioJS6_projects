@@ -1,12 +1,20 @@
 function iniciarApp(){
-
-    const selectCategorias = document.querySelector('#categorias');
-    selectCategorias.addEventListener('change', seleccionarCategoria);
-
+    
     const resultado = document.querySelector('#resultado');
+    const selectCategorias = document.querySelector('#categorias');
+
+    if(selectCategorias){
+        selectCategorias.addEventListener('change', seleccionarCategoria);
+        obtenerCategorias();
+    }
+
+    const favoritosDiv = document.querySelector('.favoritos');
+    if( favoritosDiv ){
+        obtenerFavoritos();
+    }
+
     const modal = new bootstrap.Modal('#modal', {})
 
-    obtenerCategorias();
 
     function obtenerCategorias(){
         const url = 'https://www.themealdb.com/api/json/v1/1/categories.php';
@@ -61,15 +69,15 @@ function iniciarApp(){
 
             const recetaImagen = document.createElement('img');
             recetaImagen.classList.add('card-img-top');
-            recetaImagen.alt =  `Imagen de la Receta ${strMeal}`;
-            recetaImagen.src =  strMealThumb;
+            recetaImagen.alt =  `Imagen de la Receta ${strMeal ?? receta.title} `;
+            recetaImagen.src =  strMealThumb ?? receta.img;
 
             const recetaCardBody = document.createElement('div');
             recetaCardBody.classList.add('card-body');
 
             const recetaHeading = document.createElement('h3');
             recetaHeading.classList.add('card-title','mb-3');
-            recetaHeading.textContent = strMeal;
+            recetaHeading.textContent = strMeal ?? receta.title;
 
             const recetaButton = document.createElement('button');
             recetaButton.classList.add('btn', 'btn-danger','w-100');
@@ -78,7 +86,7 @@ function iniciarApp(){
             // recetaButton.dataset.bsToggle = 'modal';
 
             recetaButton.onclick = function(){
-                seleccionarReceta(idMeal)
+                seleccionarReceta(idMeal ?? receta.id)
             }
 
             // Inyectar en el código el HTML
@@ -205,8 +213,22 @@ function iniciarApp(){
 
         toast.show()
     }
-    
 
+    function obtenerFavoritos(){
+        const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
+
+        if(favoritos.length){
+            mostrarRecetas(favoritos)
+            return
+
+        }
+
+        const noFavoritos = document.createElement('p');
+        noFavoritos.textContent = 'No hay favoritos aún'
+        noFavoritos.classList.add('fs-4', 'text-center', 'font-bold', 'mt-5');
+        favoritosDiv.appendChild( noFavoritos );
+    }
+    
     function limpiarHTML(resultado){
         while( resultado.firstChild ){
             resultado.removeChild(resultado.firstChild);
