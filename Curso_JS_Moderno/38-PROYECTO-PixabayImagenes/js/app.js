@@ -42,7 +42,7 @@ function mostrarAlerta( mensaje ){
 
 function buscarImagenes(termino){
     const key = `13099941-196090c13d211ef02671a6e4e`;
-    const url = `https://pixabay.com/api/?key=${key}&q=${termino}`;
+    const url = `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=50`;
 
     // console.log( url );
 
@@ -55,5 +55,33 @@ function buscarImagenes(termino){
 
 function mostrarImagenes( imagenes ){
     console.log( imagenes );
+
+    while( resultado.firstChild ){
+        resultado.removeChild(resultado.firstChild);
+    }
+
+    // Iterar sobre el arreglo de imagenes y construir el HTML
+    imagenes.forEach(imagen => {
+    
+        const { previewURL, likes, views, largeImageURL, } = imagen;
+        resultado.innerHTML += `
+            <div class="w-1/2 md:w-1/3 lg:w-1/4 p-3 mb-4">
+                <div class="bg-white">
+                    <img class="w-full" src="${previewURL}">
+
+                    <div class="p-4">
+                        <p class="font-bold">${likes} <span class="font-light">Me Gusta</span> </p>
+                        <p class="font-bold">${views} <span class="font-light">Veces vista</span> </p>
+
+                        <a class="block w-full bg-blue-800 hover:bg-blue-500 text-white uppercase font-bold text-center rounded mt-5 p-1"
+                         href="${largeImageURL}" target="_black" rel="noopener noreferrer">
+                            Ver Imagen
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `
+        
+    });
     
 }
