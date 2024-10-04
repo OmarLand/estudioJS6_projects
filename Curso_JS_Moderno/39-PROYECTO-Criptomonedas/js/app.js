@@ -90,6 +90,10 @@ function consultarAPI(){
     // const url = `https://min-api.cryptocompare.com/data/price?fsym=${criptomoneda}&tsyms=${moneda}`;
     const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
 
+    //Mostrar SPINNER
+    mostrarSpinner();
+
+
     fetch(url)
         .then( res => res.json() )
         .then( cotizacion => {
@@ -102,6 +106,8 @@ function mostrarCotizacionHTML(cotizacion){
     //console.log('>>', cotizacion );
     const { PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR,LASTUPDATE } = cotizacion;
 
+    limpiarHTML();
+
     const precio = document.createElement('p');
     precio.classList.add('precio');
     precio.innerHTML = `El precio es: <span>${PRICE}</span>`;
@@ -111,9 +117,38 @@ function mostrarCotizacionHTML(cotizacion){
 
     const precioBajo = document.createElement('p');
     precioBajo.innerHTML = `<p>Precio más bajo del día: <span>${LOWDAY}</span></p>`
-
-    resultado.appendChild(precio)
-    resultado.appendChild(precioAlto)
-    resultado.appendChild(precioBajo)
     
+    const ultimasHoras = document.createElement('p');
+    ultimasHoras.innerHTML = `<p>Precio últimas 24 hrs: <span>${CHANGEPCT24HOUR}%</span></p>`
+    
+    const ultimoCambio = document.createElement('p');
+    ultimoCambio.innerHTML = `<p>Ultima actualización: <span>${LASTUPDATE}</span></p>`
+
+    resultado.appendChild(precio);
+    resultado.appendChild(precioAlto);
+    resultado.appendChild(precioBajo);
+    resultado.appendChild(ultimasHoras);
+    resultado.appendChild(ultimoCambio);
+    
+}
+
+function limpiarHTML(){
+    while( resultado.firstChild ){
+        resultado.removeChild(resultado.firstChild);
+    }
+}
+
+function mostrarSpinner(){
+    limpiarHTML();
+
+    const spinner = document.createElement('div');
+    spinner.classList.add('spinner');
+
+    spinner.innerHTML = `
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    `;
+
+    resultado.appendChild(spinner)
 }
