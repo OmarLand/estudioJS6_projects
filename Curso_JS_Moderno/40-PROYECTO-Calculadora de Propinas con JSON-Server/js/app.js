@@ -1,4 +1,4 @@
-const cliente = {
+let cliente = {
     mesa   : '',
     hora   : '',
     pedido : [],
@@ -34,8 +34,14 @@ function guardarCliente(){
 
         return;
 
-    } 
-        console.log('Todos los campos están correctos');
+    }
+        // Asignamos datos del formulario a cliente: 
+        cliente = { ...cliente, mesa, hora }
+        
+        // Ocultar Modal
+        const modalFormulario = document.querySelector('#formulario');
+        const modalBootStrap  = bootstrap.Modal.getInstance(modalFormulario);
+        modalBootStrap.hide();
     
     
 }
