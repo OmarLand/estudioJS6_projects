@@ -42,6 +42,13 @@ function guardarCliente(){
         const modalFormulario = document.querySelector('#formulario');
         const modalBootStrap  = bootstrap.Modal.getInstance(modalFormulario);
         modalBootStrap.hide();
-    
-    
+
+        // Mostrar las secciones:
+        mostrarSecciones();
+}
+
+function mostrarSecciones(){
+    const seccionesOcultas = document.querySelectorAll('.d-none');
+
+    seccionesOcultas.forEach(seccion => seccion.classList.remove( 'd-none') )
 }
