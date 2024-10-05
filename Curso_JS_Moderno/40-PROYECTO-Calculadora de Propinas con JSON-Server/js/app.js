@@ -45,10 +45,21 @@ function guardarCliente(){
 
         // Mostrar las secciones:
         mostrarSecciones();
+
+        // Obtener Platillos de la API Json-Server:
+        obtenerPlatillos(); 
 }
 
 function mostrarSecciones(){
     const seccionesOcultas = document.querySelectorAll('.d-none');
 
     seccionesOcultas.forEach(seccion => seccion.classList.remove( 'd-none') )
+}
+
+function obtenerPlatillos(){
+     const url = 'http://localhost:3000/platillos';
+     fetch(url)
+        .then(res => res.json())
+        .then(res => console.log( res ) )
+        .catch( error => console.log( '>>>', error ) )
 }
