@@ -145,7 +145,10 @@ function agregarPlatillo(producto){
         
         
     } else {
-        console.log('No es mayor va 0');
+        // console.log('No es mayor va 0');
+        // Eliminar elementos cuando la cantidad sea 0
+        const resultado = pedido.filter( articulo => articulo.id !== producto.id );
+        cliente.pedido = [ ...resultado ];
     }
 
 
