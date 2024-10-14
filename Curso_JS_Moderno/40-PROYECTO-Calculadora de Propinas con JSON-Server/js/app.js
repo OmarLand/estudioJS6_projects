@@ -149,8 +149,63 @@ function agregarPlatillo(producto){
         // Eliminar elementos cuando la cantidad sea 0
         const resultado = pedido.filter( articulo => articulo.id !== producto.id );
         cliente.pedido = [ ...resultado ];
-    }
-
-
+    }   
     
+    // Limpiar el HTML previo visualizado
+    limpiarHTML();
+
+    // Mostrar el resumen
+    actualizarResumen();
+}
+
+function actualizarResumen(){
+    const contenido = document.querySelector('#resumen .contenido');
+
+    const resumen = document.createElement('div')
+    resumen.classList.add('col-md-6','card','py-5','px-3','shadow');
+
+    // Información de la mesa:
+    const mesa = document.createElement('p')
+    mesa.textContent = 'Mesa: ';
+    mesa.classList.add('fw-bold');
+
+    const mesaSpan = document.createElement('span');
+    mesaSpan.textContent = cliente.mesa;
+    mesaSpan.classList.add('fw-normal');
+
+    // Información de la Hora:
+    const hora = document.createElement('p')
+    hora.textContent = 'Hora: ';
+    hora.classList.add('fw-bold');
+
+    const horaSpan = document.createElement('span');
+    horaSpan.textContent = cliente.hora;
+    horaSpan.classList.add('fw-normal');
+
+    // Agregando los elementos padres:
+    mesa.appendChild(mesaSpan);
+    hora.appendChild(horaSpan);
+
+    // Titulo de la sección
+    const heading = document.createElement('h3');
+    heading.textContent = 'Platillos Consumidos';
+    heading.classList.add('my-4','text-center');
+
+    // Iterando sobre el array de pedidos:
+
+    // Añadiendo el contenido:
+    resumen.appendChild( mesa );
+    resumen.appendChild( hora );
+    resumen.appendChild( heading );
+
+    contenido.appendChild( resumen );
+    
+}
+
+function limpiarHTML(){
+    const contenido = document.querySelector('#resumen .contenido');
+
+    while( contenido.firstChild ){
+        contenido.removeChild( contenido.firstChild );
+    }
 }
