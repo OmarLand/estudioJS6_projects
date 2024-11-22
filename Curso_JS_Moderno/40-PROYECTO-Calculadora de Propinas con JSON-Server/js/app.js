@@ -154,8 +154,13 @@ function agregarPlatillo(producto){
     // Limpiar el HTML previo visualizado
     limpiarHTML();
 
-    // Mostrar el resumen
-    actualizarResumen();
+    if(cliente.pedido.length) {
+        // Mostrar el resumen
+        actualizarResumen();
+    } else {
+        mensajePedidoVacio();
+    }
+
 }
 
 function actualizarResumen(){
@@ -290,11 +295,20 @@ function eliminarProducto( id ){
     cliente.pedido = [ ...resultado ];
 
     // console.log( cliente.pedido );
-
     // Limpiamos el HTML
     limpiarHTML();
 
     // Actualizamos el resumen:
     actualizarResumen();
     
+}
+
+function mensajePedidoVacio(){
+    const contenido = document.querySelector('#resumen .contenido');
+
+    const texto = document.createElement('p');
+    texto.classList.add('text-center');
+    texto.textContent = 'Añade los elementos del pedido';
+
+    contenido.appendChild(texto)
 }
