@@ -167,7 +167,7 @@ function actualizarResumen(){
     const contenido = document.querySelector('#resumen .contenido');
 
     const resumen = document.createElement('div')
-    resumen.classList.add('col-md-6','card','py-5','px-3','shadow');
+    resumen.classList.add('col-md-6','card','py-2','px-3','shadow');
 
     // Información de la mesa:
     const mesa = document.createElement('p')
@@ -268,12 +268,15 @@ function actualizarResumen(){
     });
 
     // Añadiendo el contenido:
+    resumen.appendChild( heading );
     resumen.appendChild( mesa );
     resumen.appendChild( hora );
-    resumen.appendChild( heading );
     resumen.appendChild( grupo );
 
     contenido.appendChild( resumen );
+
+    // Mostrar formulario de propinas:
+    formularioPropinas();
     
 }
 
@@ -298,8 +301,20 @@ function eliminarProducto( id ){
     // Limpiamos el HTML
     limpiarHTML();
 
-    // Actualizamos el resumen:
-    actualizarResumen();
+    if( cliente.pedido.length ){
+        // Actualizamos el resumen:
+        actualizarResumen();
+    } else {
+        mensajePedidoVacio();
+    }
+
+    // El producto se eliminó por lo tanto regresamos la cantidad a 0 en el input:
+    const productoEliminado = `#producto-${id}`;
+    const inputEliminado = document.querySelector(productoEliminado);
+    inputEliminado.value = 0;
+
+
+
     
 }
 
@@ -311,4 +326,25 @@ function mensajePedidoVacio(){
     texto.textContent = 'Añade los elementos del pedido';
 
     contenido.appendChild(texto)
+}
+
+function formularioPropinas(){
+    const contenido = document.querySelector('#resumen .contenido');
+
+    const formulario = document.createElement('div');
+    formulario.classList.add('col-md-6', 'formulario');
+
+    const divFormulario = document.createElement('div');
+    divFormulario.classList.add('card', 'py-2', 'px-3', 'shadow');
+
+    const heading = document.createElement('h3');
+    heading.classList.add('my-4','text-center');
+    heading.textContent = 'Propina';
+    
+
+    divFormulario.appendChild(heading);
+    formulario.appendChild(divFormulario)
+    contenido.appendChild(formulario);
+
+
 }
