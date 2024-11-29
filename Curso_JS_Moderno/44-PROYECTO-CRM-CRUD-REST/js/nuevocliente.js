@@ -1,4 +1,5 @@
 import { mostrarAlerta } from "./funciones.js";
+import { nuevoCliente } from "./API.js";
 
 (function(){
 
@@ -28,7 +29,8 @@ import { mostrarAlerta } from "./funciones.js";
             return;
         }
 
-        console.log('Si pasó la validación...');
+        // console.log('Si pasó la validación...');
+        nuevoCliente(cliente);
         
         // Validación de los campos del formulario que todos estén cubiertos
         function validar(obj){
