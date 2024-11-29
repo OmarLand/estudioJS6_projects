@@ -347,6 +347,7 @@ function formularioPropinas(){
     radio10.name = 'propina';
     radio10.value = '10';
     radio10.classList.add('form-check-input');
+    radio10.onclick = calcularPropina;
 
     const radio10Label = document.createElement('label');
     radio10Label.textContent = '10%';
@@ -368,6 +369,7 @@ function formularioPropinas(){
     const radio25Label = document.createElement('label');
     radio25Label.textContent = '25%';
     radio25Label.classList.add('form-check-label');
+    radio25.onclick = calcularPropina;
 
     const radio25Div = document.createElement('div');
     radio25Div.classList.add('form-check');
@@ -381,6 +383,7 @@ function formularioPropinas(){
     radio50.name = 'propina';
     radio50.value = '50';
     radio50.classList.add('form-check-input');
+    radio50.onclick = calcularPropina;
 
     const radio50Label = document.createElement('label');
     radio50Label.textContent = '50%';
@@ -392,8 +395,7 @@ function formularioPropinas(){
     radio50Div.appendChild(radio50);
     radio50Div.appendChild(radio50Label);
 
-
-
+    
     // Agregar al DIV principal
     divFormulario.appendChild(heading);
     divFormulario.appendChild(radio10Div);
@@ -403,6 +405,9 @@ function formularioPropinas(){
     // Agregar al formulario
     formulario.appendChild(divFormulario)
     contenido.appendChild(formulario);
+}
 
-
+function calcularPropina() {
+    console.log('Calculando ando ando ando...');
+    
 }
