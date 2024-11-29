@@ -3,6 +3,7 @@ const url = 'https://picsum.photos/list';
 
 document.addEventListener('DOMContentLoaded', obtenerDatos);
 
+// Usando Promises
 function obtenerDatos(){
     fetch(url)
         .then( rpta => rpta.json())
@@ -11,3 +12,16 @@ function obtenerDatos(){
 
 }
 
+
+// Usando Async y Awaits
+async function  obtenerDatos(){
+    try {
+        const rpta = await fetch( url );
+        const resp = await rpta.json();
+        console.log( resp );
+    } catch (error) {
+        console.log(error);
+        
+    }
+    
+}
