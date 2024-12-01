@@ -1,11 +1,18 @@
 {
   "clientes": [
     {
-      "nombre": "Juan NUEVO!",
-      "email": "correo2@correo.com",
-      "telefono": "12",
-      "empresa": "12212",
-      "id": "26"
+      "id": "1",
+      "nombre": "Omar",
+      "email": "pruebas@dominio.com",
+      "telefono": "999999999",
+      "empresa": "Casa S.L."
+    },
+    {
+      "id": "2",
+      "nombre": "Pruebas",
+      "email": "pruebas@correo.com",
+      "telefono": "123456789",
+      "empresa": "Pruebas SLRU"
     }
   ]
 }

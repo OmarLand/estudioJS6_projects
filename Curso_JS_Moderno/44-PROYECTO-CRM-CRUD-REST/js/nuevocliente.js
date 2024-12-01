@@ -1,4 +1,4 @@
-import { mostrarAlerta } from "./funciones.js";
+import { mostrarAlerta, validar } from "./funciones.js";
 import { nuevoCliente } from "./API.js";
 
 (function(){
@@ -33,9 +33,7 @@ import { nuevoCliente } from "./API.js";
         nuevoCliente(cliente);
         
         // Validación de los campos del formulario que todos estén cubiertos
-        function validar(obj){
-            return !Object.values(cliente).every( input => input !== '' );
-        }
+        
 
     }
 
