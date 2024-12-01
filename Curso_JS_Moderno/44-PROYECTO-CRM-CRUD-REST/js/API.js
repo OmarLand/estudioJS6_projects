@@ -10,7 +10,6 @@ export const nuevoCliente = async ( cliente ) => {
                 'Content-Type' : 'application/json'
             }
         });
-
         window.location.href = 'index.html';
    
     } catch (error) {
