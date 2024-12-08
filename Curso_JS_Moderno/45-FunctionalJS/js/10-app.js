@@ -74,3 +74,4 @@ const empleado = Empleado('Delphy', null, 'Administrativa');
 empleado.mostrarNombre();
 empleado.agregarEmail('empleado@dominio.es')
 empleado.mostrarEmail()
+empresa.mostrarPuesto()
