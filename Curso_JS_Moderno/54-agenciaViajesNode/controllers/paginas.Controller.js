@@ -16,7 +16,7 @@ const paginaViajes = async(req, res)=> {
 
     //Consultar la DB
     const viajes = await Viaje.findAll();
-    console.log( viajes );
+    //console.log( viajes );
     
 
     res.render('viajes', {
@@ -31,9 +31,29 @@ const paginaTestimoniales =  (req, res)=> {
     });
 }
 
+
+// Muestra un viaje por su Slug
+const paginaDetalleViaje = async (req, res) => {
+    // console.log(req.params.viaje);
+    const { slug } = req.params;
+
+    try {
+        const viaje = await Viaje.findOne({ where : { slug } });
+
+        res.render('viaje', {
+            pagina: 'Información Viaje',
+            viaje
+        })
+    } catch (error) {
+        console.error('>>>', error );
+        
+    }
+}
+
 export {
     paginaInicio,
     paginaNosotros,
     paginaViajes,
-    paginaTestimoniales
+    paginaTestimoniales,
+    paginaDetalleViaje
 }

@@ -24,8 +24,10 @@ app.use( (req, res, next) =>{
     res.locals.actualYear  = year.getFullYear();
     res.locals.nombresitio = 'Agencia de Viajes';
     return next();
-    
 })
+
+// Agregar Body Parsel para leer los datos del form
+app.use(express.urlencoded({extended:true}));
 
 // Definir la carpeta publica
 app.use( express.static('public') );
