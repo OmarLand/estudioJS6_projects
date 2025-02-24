@@ -6,22 +6,11 @@ block contenido
 
 
         blockquote.text.center Lee sobre nuestros clientes y sus experiencias
-        .row.testimoniales
-            each testimonial in testimoniales
-                .col-md-6.col-lg-4.mb-4
-                    .card
-                        .card-body
-                            blockquote.blockquote
-                                p.mb-0
-                                    | #{testimonial.mensaje}
-                                footer.blockquote-footer
-                                     | #{testimonial.nombre}
+        include ./layout/bloque_testimoniales
 
         .row
-
             .col-md-12
                 h2.d-block.w-100.text-center Agrega un testimonio:
-
                 if(errores)
                     each error in errores 
                         .alert.col.alert-danger.text-center= error.mensaje

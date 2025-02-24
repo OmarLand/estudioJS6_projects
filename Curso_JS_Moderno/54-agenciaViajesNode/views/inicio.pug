@@ -2,5 +2,27 @@ extends ./layout/index
 
 block contenido
     main.contnainer-mt-5
-        .row
-            h1= pagina
+        h2.text-center.mb-5 Sobre Nosotros 
+
+        .row.mb-5
+            .col-md-6
+                p Proin iaculis diam eget nunc congue vehicula. Sed quis vehicula quam. Morbi et ornare dolor, quis efficitur ipsum. Sed at feugiat sem, ut egestas erat. Phasellus congue vestibulum sagittis. Mauris mollis mollis eros nec placerat. Donec in purus eu ligula pretium imperdiet nec et arcu. Nam a neque sagittis, sagittis dolor vel, semper lectus. Nunc facilisis nisl tortor, vitae efficitur eros sagittis sit amet. Nullam nec mauris eget metus auctor molestie feugiat non nisl. Mauris vehicula urna ullamcorper rutrum ornare. Suspendisse quis elit id ipsum cursus lobortis eu eu libero. Duis tincidunt facilisis augue sit amet iaculis. Integer pretium fringilla turpis non euismod. Cras posuere diam orci, at commodo erat pretium id. Donec sed imperdiet sem, et placerat odio.
+                //- p Proin iaculis diam eget nunc congue vehicula. Sed quis vehicula quam. Morbi et ornare dolor, quis efficitur ipsum. Sed at feugiat sem, ut egestas erat. Phasellus congue vestibulum sagittis. Mauris mollis mollis eros nec placerat. Donec in purus eu ligula pretium imperdiet nec et arcu. Nam a neque sagittis, sagittis dolor vel, semper lectus. Nunc facilisis nisl tortor, vitae efficitur eros sagittis sit amet. Nullam nec mauris eget metus auctor molestie feugiat non nisl. Mauris vehicula urna ullamcorper rutrum ornare. Suspendisse quis elit id ipsum cursus lobortis eu eu libero. Duis tincidunt facilisis augue sit amet iaculis. Integer pretium fringilla turpis non euismod. Cras posuere diam orci, at commodo erat pretium id. Donec sed imperdiet sem, et placerat odio.
+            .col-md-6
+                img(src="img/nosotros.jpg", alt="imagen sobre nosotros", class="img-fluid")
+            
+        include ./layout/bloque_viajes
+
+    .descuento
+        .container
+            .row 
+                .col-md-6 
+                    .contenido
+                        h3 5% de Descuento 
+                        p.titulo Viae a Canada 
+                        p.fecha 20 de Marzo de 2025 - 30 de Marzo de 2025
+                        p.precio $3,500 USD
+
+    .container
+        h2.mt-5.text-center Testimoniales
+        include ./layout/bloque_testimoniales
